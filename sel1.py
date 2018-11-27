@@ -30,28 +30,32 @@ while True:
 	# if new_height == last_height:  break
 	last_height = new_height
 	i = i+1
-	if(i>12):
+	if(i>10):
 		break
 	
-element = browser.find_elements_by_id('u_0_t')  # Find the search box
-for i in element:
-	print(i.text.encode('utf-8') )
+element1 = browser.find_elements_by_id('js_54')  # Find the search box
+element2 = browser.find_elements_by_xpath("//p")
+element3 = browser.find_elements_by_class_name('UFILikeSentenceText')
+element4 = browser.find_elements_by_class_name('z_c3pyo1brp')  # Find the search box
+
+for i in element1:
+	with open('yair2.txt', 'a', encoding='utf-8') as f:
+		print(i.text, file=f)
+
+
+for i in element2:
 	with open('yair2.txt', 'a', encoding='utf-8') as f:
 		print(i.text, file=f) 
 
-element = browser.find_elements_by_xpath("//p")
-for i in element:
-	print(i.text.encode('utf-8') )
+for i in element3:
+	span = i.find_element_by_tag_name("span")
 	with open('yair2.txt', 'a', encoding='utf-8') as f:
-		print(i.text, file=f)
-
-element = browser.find_elements_by_class_name('userContent')
-for i in element:
-	print(i.text.encode('utf-8') )
-	# file.write(i.text+'\n')
+		print(span.text, file=f)
+		
+for i in element4:
 	with open('yair2.txt', 'a', encoding='utf-8') as f:
-		print(i.text, file=f)
-	
+		print(i.text, file=f) 
+		
 # browser.quit()
 # file.close() 
 

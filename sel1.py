@@ -1,5 +1,6 @@
 from selenium import webdriver
 import time
+import os
 from selenium.webdriver.common.keys import Keys
 
 
@@ -33,29 +34,35 @@ while True:
 	if(i>10):
 		break
 	
-element1 = browser.find_elements_by_id('js_54')  # Find the search box
-element2 = browser.find_elements_by_xpath("//p")
-element3 = browser.find_elements_by_class_name('UFILikeSentenceText')
-element4 = browser.find_elements_by_class_name('z_c3pyo1brp')  # Find the search box
+element = browser.find_elements_by_class_name('userContentWrapper')
 
-for i in element1:
-	with open('yair2.txt', 'a', encoding='utf-8') as f:
-		print(i.text, file=f)
+with open('yair9.txt', 'a', encoding='utf-8') as f:
+	print('[', file=f)
+
+for i in element:
+	element1 = i.find_element_by_class_name('timestampContent')  # Find the search box
+	element2 = i.find_element_by_tag_name('p')
+	#element3 = i.find_element_by_class_name('UFILikeSentenceText')
+	#element4 = element3.find_element_by_tag_name('span')  # Find the search box
+	#element5 = i.find_element_by_class_name('UFIShareLink')
+	#element6 = i.find_element_by_class_name('UFIPagerLink')
+	
+	with open('yair9.txt', 'a', encoding='utf-8') as f:
+		print('{', file=f)
+		print('\"time\":\"'+element1.text+'\",', file=f)
+		print('\"content\":\"'+element2.text+'\"', file=f)
+		# print('\"likes\":\"'+element4.text+'\"', file=f)
+		# print('\"shares\":\"'+element5.text+'\",', file=f)
+		# print('\"comments\":\"'+element6.text+'\"', file=f)
+		print('},', file=f)
+
+with open('yair9.txt', 'rb+') as filehandle:
+    filehandle.seek(-3, os.SEEK_END)
+    filehandle.truncate()
+with open('yair9.txt', 'a', encoding='utf-8') as f:
+	print(']', file=f)
 
 
-for i in element2:
-	with open('yair2.txt', 'a', encoding='utf-8') as f:
-		print(i.text, file=f) 
-
-for i in element3:
-	span = i.find_element_by_tag_name("span")
-	with open('yair2.txt', 'a', encoding='utf-8') as f:
-		print(span.text, file=f)
-		
-for i in element4:
-	with open('yair2.txt', 'a', encoding='utf-8') as f:
-		print(i.text, file=f) 
-		
 # browser.quit()
 # file.close() 
 

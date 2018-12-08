@@ -26,7 +26,7 @@ def getConfessions(confessionsSource):
 		# if new_height == last_height:  break
 		last_height = new_height
 		i = i+1
-		if(i>2000):
+		if(i>3):
 			break
 		
 	element = browser.find_elements_by_class_name('userContentWrapper')
@@ -35,12 +35,16 @@ def getConfessions(confessionsSource):
 		time1 = i.find_element_by_class_name('timestampContent')
 		time1 = time1.text
 		
-		content = i.find_elements_by_tag_name('p')
-		if len(content) == 0:
+		contents = i.find_elements_by_tag_name('p')
+		if len(contents) == 0:
 			content = '';
 		else:
-			content = content[0].text
+			content = contents[0].text
+			text_exposed_show = contents[0].find_elements_by_class_name('text_exposed_show')
+			if len(text_exposed_show) > 0:
+				content = content+text_exposed_show[0].text
 			content = content.replace("\n", " ")
+			content = content.replace("...", " ")
 			content = content.replace('"', "'")
 		
 		likes = i.find_elements_by_class_name('UFILikeSentenceText')
@@ -82,7 +86,7 @@ confessionsList = ["ShenkarConfessions","bezalelconf","TechnionConfessions"]
 
 for confPage in confessionsList:
 	getConfessions(confPage)
-browser.quit()
+# browser.quit()
 
 with open(filename, 'w', encoding='utf-8') as outfile:
     data = json.dump(posts, outfile, ensure_ascii=False)

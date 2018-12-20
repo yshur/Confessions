@@ -2,34 +2,41 @@ import urllib.request
 import re
 import json
 
-def getConfessions(confessionsSource):
+def getWordsCounter(confessionsSource):
 
 	file = open('data1.json', 'r', encoding="utf8")
+	python_obj = json.load(file)
+	#print(python_obj)
 	di = dict()
-	for line in file:
-		if re.search('content', line):
-			words = line.split()
+	for line in python_obj:
+		words = line['content'].split()
+		if line['source'] == confessionsSource:
+			#print(line['source'])
 			for word in words:
 				if word in di:
 					di[word] = di[word]+1
 				else:
 					di[word]=1
-					#print (word, di[word])
-	with open('CountWords.json', 'w', encoding='utf-8') as outfile:
-		json.dump(di, outfile, ensure_ascii=False)
-				
+	
+	try: 
+		occurrence = {}
+		occurrence['source'] = confessionsSource
+		occurrence['word_occurrence'] = di
+		all_occurrences.append(occurrence)
+
+	except AttributeError:
+			pass
+			
+	print('#',confessionsSource,'#')
+	print(di, '\n')
+	print('-------------------------------------------------------------------------------------------------------------------------')
+	
+	with open('wordsCounter.txt', 'w', encoding='utf-8') as outfile:
+		json.dump(all_occurrences, outfile, ensure_ascii=False)			
+	
+	
+all_occurrences = []				
 confessionsList = ["ShenkarConfessions","bezalelconf","TechnionConfessions"]
 
 for confPage in confessionsList:
-	getConfessions(confPage)
-			
-
-
-
-	
-	
-
-
-
-
-	
+	getWordsCounter(confPage)

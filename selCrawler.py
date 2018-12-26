@@ -78,24 +78,24 @@ def getConfessions(confessionsSource):
 			likesArr = likes.split(',')
 			likes = likesNum+len(likesArr)
 		
-		shares = i.find_elements_by_class_name('UFIShareLink')
-		if len(shares) == 0:
-			shares = 0
-		else:
-			shares = shares[0].text
-			shares = [int(s) for s in shares.split() if s.isdigit()]
-			shares = shares[0]
+		# shares = i.find_elements_by_class_name('UFIShareLink')
+		# if len(shares) == 0:
+			# shares = 0
+		# else:
+			# shares = shares[0].text
+			# shares = [int(s) for s in shares.split() if s.isdigit()]
+			# shares = shares[0]
 			
-		comments = i.find_elements_by_class_name('UFIPagerLink')
-		if len(comments) == 0:
-			comments = 0
-		else:
-			comments = comments[0].text
-			comments = [int(s) for s in comments.split() if s.isdigit()]
-			if len(comments) > 0:
-				comments = comments[0]
-			else:
-				comments = 1
+		# comments = i.find_elements_by_class_name('UFIPagerLink')
+		# if len(comments) == 0:
+			# comments = 0
+		# else:
+			# comments = comments[0].text
+			# comments = [int(s) for s in comments.split() if s.isdigit()]
+			# if len(comments) > 0:
+				# comments = comments[0]
+			# else:
+				# comments = 1
 		
 		try:
 			post = {}
@@ -104,22 +104,21 @@ def getConfessions(confessionsSource):
 			post["unix-time"] = utime
 			post["content"] = content
 			post["likes"] = likes
-			post["shares"] = shares
-			post["comments"] = comments
+			#post["shares"] = shares
+			#post["comments"] = comments
 			posts.append(post)
 
 		except AttributeError:
 			pass
 
-filename 		= "data1.json"
+filename 		= "data100.json"
 posts 			= []
 browser 		= webdriver.Firefox()
-confessionsList = ["ShenkarConfessions","bezalelconf","TechnionConfessions"]
+confessionsList = ["ShenkarConfessions","bezalelconf","IDCHerzliyaConfessions","sapirconfession","telhaiconfessions","hitconfessionsisrael","RuppinConfession","HUIConfessions","TechnionConfessions","ArielUConfessions","tel.aviv.university.confessions","BGUConfession", "biuconfessions2018","HUJI.Confessions" ]
 
 for confPage in confessionsList:
 	getConfessions(confPage)
 # browser.quit()
 
 with open(filename, 'w', encoding='utf-8') as outfile:
-    data = json.dump(posts, outfile, ensure_ascii=False)
-
+    data = json.dump(posts, outfile, indent=2, ensure_ascii=False)

@@ -33,7 +33,10 @@ def getWordsCounter(confessionsSource):
 	for word in list(di):
 		if di[word] < 10:
 			del di[word]
-
+	for word in list(di):
+		if word.isdigit():
+			del di[word]
+	
 	try: 
 		occurrence = {}
 		occurrence['source'] = confessionsSource
@@ -53,5 +56,5 @@ confessionsList = ["ShenkarConfessions","bezalelconf","IDCHerzliyaConfessions","
 for confPage in confessionsList:
 	getWordsCounter(confPage)
 
-# with open('wordsCounterMoreThanTen.json', 'w', encoding='utf-8') as outfile:
-	# json.dump(all_occurrences,outfile, indent=2, ensure_ascii=False)
+with open('x.json', 'w', encoding='utf-8') as outfile:
+	json.dump(all_occurrences,outfile, indent=2, ensure_ascii=False)

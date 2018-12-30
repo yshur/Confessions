@@ -4,6 +4,7 @@ import os
 from selenium.webdriver.common.keys import Keys
 import json
 import re
+import datetime
 
 
 def getConfessions(confessionsSource):
@@ -35,22 +36,11 @@ def getConfessions(confessionsSource):
 	element = browser.find_elements_by_class_name('userContentWrapper')
 
 	for i in element:
-		time1 = i.find_element_by_class_name('_5ptz')
-		time2 = time1.get_attribute("title")
-		time3 = re.split(' |\/|:', time2)
-		if time3[4][-2:] == 'am':
-			if time3[3] == '12':
-				time3[3] = "00"
-			if len(time3[3]) < 2:
-				time3[3] = '0'+time3[3]
-		else:
-			if int(time3[3]) < 12:
-				time3[3] = str(int(time3[3])+12)
-		time3[4] = time3[4][:-2]
-		time2 = time3[2]+'-'+time3[0]+'-'+time3[1]+' '+time3[3]+':'+time3[4]+":00"
-		print(time2)
-		
+		time1 = i.find_element_by_class_name('_5ptz')		
 		utime = time1.get_attribute("data-utime")
+		utime = time1.get_attribute("data-utime")
+		time2 = datetime.datetime.fromtimestamp(int(utime)).strftime('%Y-%m-%d %H:%M:%S')
+		print(time2)
 		
 		contents = i.find_elements_by_tag_name('p')
 		if len(contents) == 0:
@@ -84,7 +74,10 @@ def getConfessions(confessionsSource):
 		else:
 			shares = shares[0].text
 			shares = [int(s) for s in shares.split() if s.isdigit()]
-			shares = shares[0]
+			if len(shares) > 0:
+				shares = shares[0]
+			else:
+				shares = 1
 			
 		comments = i.find_elements_by_class_name('UFIPagerLink')
 		if len(comments) == 0:
@@ -106,6 +99,8 @@ def getConfessions(confessionsSource):
 			post["likes"] = likes
 			post["shares"] = shares
 			post["comments"] = comments
+			post["key_words"] = ''
+			post["issues"] = ''
 			posts.append(post)
 
 		except AttributeError:
@@ -114,12 +109,11 @@ def getConfessions(confessionsSource):
 filename 		= "data1.json"
 posts 			= []
 browser 		= webdriver.Firefox()
-confessionsList = ["ShenkarConfessions","bezalelconf","TechnionConfessions"]
+confessionsList = ["ShenkarConfessions","bezalelconf","IDCHerzliyaConfessions","sapirconfession","telhaiconfessions","hitconfessionsisrael","RuppinConfession","HUIConfessions","TechnionConfessions","ArielUConfessions","tel.aviv.university.confessions","BGUConfession", "biuconfessions2018","HUJI.Confessions" ]
 
 for confPage in confessionsList:
 	getConfessions(confPage)
 # browser.quit()
 
 with open(filename, 'w', encoding='utf-8') as outfile:
-    data = json.dump(posts, outfile, ensure_ascii=False)
-
+    data = json.dump(posts, outfile, indent=2, ensure_ascii=False)

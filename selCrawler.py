@@ -12,7 +12,7 @@ def getConfessions(confessionsSource):
 	
 	browser.get('https://www.facebook.com/'+confessionsSource+'/')
 
-	SCROLL_PAUSE_TIME = 0.6
+	SCROLL_PAUSE_TIME = 0.7
 	
 	# Get scroll height
 	last_height = browser.execute_script("return document.body.scrollHeight")
@@ -30,7 +30,7 @@ def getConfessions(confessionsSource):
 		# if new_height == last_height:  break
 		last_height = new_height
 		i = i+1
-		if(i>400):
+		if(i>700):
 			break
 		
 	element = browser.find_elements_by_class_name('userContentWrapper')
@@ -106,12 +106,15 @@ def getConfessions(confessionsSource):
 		except AttributeError:
 			pass
 
-filename 		= "data1.json"
+filename 		= "data3.json"
 posts 			= []
 browser 		= webdriver.Firefox()
 confessionsList = ["ShenkarConfessions","bezalelconf","IDCHerzliyaConfessions","sapirconfession","telhaiconfessions","hitconfessionsisrael","RuppinConfession","HUIConfessions","TechnionConfessions","ArielUConfessions","tel.aviv.university.confessions","BGUConfession", "biuconfessions2018","HUJI.Confessions" ]
-
+with open(filename, mode='w', encoding='utf-8') as f:
+    json.dump(posts, f)
+	
 for confPage in confessionsList:
+	posts = []
 	getConfessions(confPage)
 # browser.quit()
 

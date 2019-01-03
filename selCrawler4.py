@@ -30,7 +30,7 @@ def getConfessions(confessionsSource):
 		# if new_height == last_height:  break
 		last_height = new_height
 		i = i+1
-		if(i>800):
+		if(i>600):
 			break
 
 	element = browser.find_elements_by_class_name('userContentWrapper')
@@ -60,14 +60,13 @@ def getConfessions(confessionsSource):
 		else:
 			likes = likes[0].find_element_by_tag_name('span')
 			likes = likes.text
-			if len(likes) > 0:
-				likesNum = [int(s) for s in likes.split() if s.isdigit()]
-				if len(likesNum) > 0:
-					likesNum = likesNum[0]
-				else:
-					likesNum = 0
-				likesArr = likes.split(',')
-				likes = likesNum+len(likesArr)
+			likesNum = [int(s) for s in likes.split() if s.isdigit()]
+			if len(likesNum) > 0:
+				likesNum = likesNum[0]
+			else:
+				likesNum = 0
+			likesArr = likes.split(',')
+			likes = likesNum+len(likesArr)
 
 		shares = i.find_elements_by_class_name('UFIShareLink')
 		if len(shares) == 0:
@@ -141,12 +140,8 @@ def processWord(word):
 	return word
 	
 browser 		= webdriver.Firefox()
-# confessionsList = ["TechnionConfessions"]
-confessionsList = ["ShenkarConfessions","bezalelconf","IDCHerzliyaConfessions",
-					"sapirconfession","telhaiconfessions","hitconfessionsisrael",
-					"RuppinConfession","HUIConfessions","TechnionConfessions",
-					"ArielUConfessions","tel.aviv.university.confessions","BGUConfession",
-					"biuconfessions2018","HUJI.Confessions" ]
+confessionsList = ["BGUConfession"]
+# confessionsList = ["TechnionConfessions","ArielUConfessions","tel.aviv.university.confessions","BGUConfession", "biuconfessions2018","HUJI.Confessions" ]
 stopFile = open("hebrewStopwords.json", mode='r', encoding='utf-8')
 stopWords = json.load(stopFile)
 

@@ -28,7 +28,7 @@ app.all('*', (req, res, next) => {
 //     res.status(200).sendFile(`${__dirname}/index.html`);
 // });
 
-app.get('/wordsOver3000', words.wordsOver3000);
+app.get('/wordsOver300', words.wordsOver3000);
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Word = require('./schema/wordsSchema');
 
-exports.getTopWords = (req, res) => {
+exports.wordsOver3000 = (req, res) => {
     console.log('wordsOver3000');
     Word.find({total:{$gt:3000}},
         (err, word) => {

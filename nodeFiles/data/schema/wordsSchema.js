@@ -1,7 +1,6 @@
 var mongoose        = require('mongoose'),
     wordSchema      = new mongoose.Schema({
 
-
         word: {
             type:String,
             index:1
@@ -9,7 +8,6 @@ var mongoose        = require('mongoose'),
         total:{
             type: Number
         }
-    }, {collection: 'colleges_words'});
-
+    }, {collection: 'words_more_than_50'});
 
 module.exports = mongoose.model('Word', wordSchema);

@@ -5,14 +5,18 @@ class Chart extends Component{
   constructor(props){
     super(props);
     this.state = {
-      chartData: props.chartData
+      chartData: props.chartData,
     }
+    console.log(props);
   }
 
   static defaultProps = {
     displayTitle: true,
     displayLegend: true,
     legendPosition: 'right'
+  }
+  componentWillReceiveProps(props) {
+    this.setState({chartData :props.chartData});
   }
 
   render(){
@@ -25,7 +29,7 @@ class Chart extends Component{
             options={{
               title:{
                 display: this.props.displayTitle,
-                text: 'Confessions',
+                text: 'Top Words Confessions',
                 fontSize:24
               },
               legend:{

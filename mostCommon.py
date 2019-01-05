@@ -4,20 +4,20 @@ from collections import Counter
 
 
 def most_common():
-	file = open('data1College.json', 'r', encoding="utf8")
-	python_obj = json.load(file)
+	file = open('nnn.json', 'r', encoding="utf8")
+	data_file = json.load(file)
 
 	words_in_one_list = []
 
-	for line in python_obj:
-		words = line['content'].split()
+	for line in data_file:
+		#words = line['content'].split()
 		#print(words)
-		words_in_one_list.extend(words)
+		#words_in_one_list.extend(line)
 	#print(words_in_one_list)
-	c = Counter(words_in_one_list)
-	print(c)
-	top10 = c.most_common(10)
+		c = Counter(data_file)
+	# print(c)
+	# top10 = c.most_common(10)
 
-	with open('top10Colleges.json', 'w', encoding='utf-8') as outfile:
-		json.dump(top10,outfile,indent=2, ensure_ascii=False)
+	# with open('ccc.json', 'w', encoding='utf-8') as outfile:
+		# json.dump(top10,outfile,indent=2, ensure_ascii=False)
 			

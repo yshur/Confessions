@@ -18,14 +18,14 @@ for i in element:
 	print(word)
 	stopword = word.split()
 	print(stopword)
-	try:  
-		x = {}
-		x["words"] = stopword
-		stopwords.append(x)
+	# try:  
+		# x = {}
+		# x["words"] = stopword
+		# stopwords.append(x)
 		
-	except AttributeError:
-			pass
+	# except AttributeError:
+			# pass
 
 				
 with open('hebrewStopwords.json', 'w', encoding='utf-8') as outfile:
-    data = json.dump(stopwords, outfile, ensure_ascii=False)
+    data = json.dump(stopword, outfile,indent=2, ensure_ascii=False)

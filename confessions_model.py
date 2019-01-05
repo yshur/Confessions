@@ -1,9 +1,9 @@
 import selCrawler					#run the script on facebook
-import wordsCounter					#count words from data 1			
+#import wordsCounter					#count words from data 1			
 import mostCommon					#top 10 words
 import collegeInstancesCounter 		#count posts instances
 import uploadData					#upload data to mlab 
-
+import wordsListCollege
 	
 #selCrawler.crawler()
 
@@ -14,3 +14,6 @@ import uploadData					#upload data to mlab
 #collegeInstancesCounter.instances_counter()
 
 uploadData.upload_data()
+
+#wordsListCollege.wordsList()
+

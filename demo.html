@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <link rel = "stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Chart</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <canvas id="myChart"></canvas>
+        </div>
+        <script>
+        let myChart = document.getElementById("myChart").getContext("2d");
+
+        //Global Options
+        Chart.defaults.global.defaultFontFamily = 'Lato';
+        Chart.defaults.global.defaultFontSize = 18;
+        Chart.defaults.global.defaultFontColor = '777';
+
+        let confessionsChart = new Chart(myChart, {
+            type: 'bar',
+            data: {
+                labels:['Tel aviv', 'Haifa', 'Bat-Yam', 'Holon', 'Eilat'],
+                datasets:[{
+                    label:'Popolation',
+                    data:[
+                      56755,
+                      45344,
+                      23123,
+                      26565,
+                      34444,
+                      34523
+                    ],
+                    backgroundColor:[
+                       'rgba(255,99,132,1)',
+                       'rgba(54, 162, 235, 1)',
+                       'rgba(255, 206, 86, 1)',
+                       'rgba(75, 192, 192, 1)',
+                       'rgba(153, 102, 255, 1)',
+                       'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth:2,
+                    borderColor:'#777',
+                    hoverBorderWidth:3,
+                    hoverBorderColor:'#000'
+                }]
+            },
+            options:{
+              title:{
+                display:true,
+                text:'Confessions',
+                fontSize: 24
+              },
+              legend:{
+                position:'right',
+                labels:{
+                  fontColor:'#000'
+                }
+              },
+              layout:{
+                padding:{
+                  left:50,
+                  right:0,
+                  bottom:0,
+                  top:0
+                }
+              }
+            }
+                });
+
+        </script>
+    </main>
+</body>
+
+
+
+</html>

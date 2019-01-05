@@ -2,6 +2,7 @@ import urllib.request
 import re
 import json
 import operator
+import string
 
 file = open('data100.json', 'r', encoding="utf8")
 data_file = json.load(file)
@@ -12,15 +13,15 @@ for line in data_file:
 
 	words = line['content'].split()
 	for word in words:
-		
-		word = re.sub(r'\W+', "", word)	
-		if word in di:
-			di[word] = di[word]+1
-		else:
-			di[word]=1
+		word = re.sub(r'\W+',"", word)
+		if word != "":
+			if word in di:
+				di[word] = di[word]+1
+			else:
+				di[word]=1
 
 for word in list(di):
-	if di[word] < 20:
+	if di[word] < 50:
 		del di[word]
 for word in list(di):
 	if word.isdigit():
@@ -29,7 +30,8 @@ for word in list(di):
 try: 
 	for key,value in di.items():
 		occurrence = {}
-		occurrence[key] = value
+		occurrence['word'] = key
+		occurrence['total'] = value
 		all_occurrences.append(occurrence)
 
 except AttributeError:
@@ -38,7 +40,5 @@ except AttributeError:
 print(di, '\n')
 print('-------------------------------------------------------------------------------------------------------------------------')
 	
-				
-
-with open('allWords.json', 'w', encoding='utf-8') as outfile:
+with open('allWordsMoreThan50.json', 'w', encoding='utf-8') as outfile:
 	json.dump(all_occurrences,outfile, indent=2, ensure_ascii=False)

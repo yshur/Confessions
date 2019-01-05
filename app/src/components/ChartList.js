@@ -11,11 +11,10 @@ class ChartList extends Component {
       Total: []
     }
     this.add = this.add.bind(this)
-    // this.next_id = this.next_id.bind(this)
   }
 
   componentDidMount() {
-  var url = 'https://topwordsconfessions.herokuapp.com/getTopWords';
+  var url = 'https://wordsover3000.herokuapp.com/wordsOver3000';
   console.log(url)
     axios.get(url)
       .then((res) => {

@@ -2,7 +2,8 @@ import json
 from pymongo import MongoClient
 
 def upload_data(name):
-	file = open(name+'.json', 'r', encoding="utf8")
+	print(name)
+	file = open(name+'_2.json', 'r', encoding="utf8")
 
 	data = json.load(file)
 	client = MongoClient('mongodb://db_usr:db_pass2@ds145484.mlab.com:45484/confessions')

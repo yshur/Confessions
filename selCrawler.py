@@ -30,29 +30,32 @@ def getConfessions(confessionsSource):
 		# if new_height == last_height:  break
 		last_height = new_height
 		i = i+1
-		if(i>800):
+		if(i>500):
 			break
 
 	element = browser.find_elements_by_class_name('userContentWrapper')
 
 	for i in element:
 		time1 = i.find_element_by_class_name('_5ptz')
-		utime = time1.get_attribute("data-utime")
+		text_root = i.find_elements_by_class_name('text_exposed_root')
+		if len(text_root) > 0:
+			browser.execute_script("arguments[0].setAttribute('class','text_exposed_root text_exposed')", text_root[0])
+
 		utime = time1.get_attribute("data-utime")
 		time2 = datetime.datetime.fromtimestamp(int(utime)).strftime('%Y-%m-%d %H:%M:%S')
 		print(time2)
 
 		contents = i.find_elements_by_tag_name('p')
-		if len(contents) == 0:
-			content = '';
-		else:
-			content = contents[0].text
-			text_exposed_show = contents[0].find_elements_by_class_name('text_exposed_show')
-			if len(text_exposed_show) > 0:
-				content = content+text_exposed_show[0].text
-			content = content.replace("\n", " ")
-			content = content.replace("...", " ")
-			content = content.replace('"', "'")
+		content = '';
+		if len(contents) > 0:
+			print(len(contents))
+			for c in contents:
+				content = content + c.text
+
+		content = content.replace("\n", " ")
+		content = content.replace("...", " ")
+		content = content.replace('"', "'")
+			
 
 		likes = i.find_elements_by_class_name('UFILikeSentenceText')
 		if len(likes) == 0:
@@ -109,8 +112,8 @@ def getConfessions(confessionsSource):
 			post["shares"] = shares
 			post["comments"] = comments
 			post["sum_like"] = likes+shares+comments
-			post["words"] = words
-			post["mean_words"] = meanWords
+			post["words"] = meanWords
+			post["mean_words"] = []
 			post["issues"] = []
 			posts.append(post)
 
@@ -119,7 +122,7 @@ def getConfessions(confessionsSource):
 
 	filename = confessionsSource+".json"
 	with open(filename, mode='w', encoding='utf-8') as f:
-	    json.dump(posts, f, indent=2, ensure_ascii=False)
+	    json.dump(posts, f, ensure_ascii=False)
 
 def isChar(char):
 	# if char >= '0' and char <= '9':
@@ -141,12 +144,13 @@ def processWord(word):
 	return word
 	
 browser 		= webdriver.Firefox()
-# confessionsList = ["TechnionConfessions"]
+# confessionsList = ["biuconfessions2018"]
 confessionsList = ["ShenkarConfessions","bezalelconf","IDCHerzliyaConfessions",
 					"sapirconfession","telhaiconfessions","hitconfessionsisrael",
 					"RuppinConfession","HUIConfessions","TechnionConfessions",
 					"ArielUConfessions","tel.aviv.university.confessions","BGUConfession",
 					"biuconfessions2018","HUJI.Confessions" ]
+					
 stopFile = open("hebrewStopwords.json", mode='r', encoding='utf-8')
 stopWords = json.load(stopFile)
 

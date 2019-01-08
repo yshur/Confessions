@@ -1,1 +1,2 @@
-geckodriver.log
+data/geckodriver.log
+nodeApp/node_modules

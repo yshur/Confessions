@@ -1,11 +1,12 @@
 from selenium import webdriver
-import time
-import os
 from selenium.webdriver.common.keys import Keys
+import numpy as np
+import os
 import json
 import re
+import time
 import datetime
-import numpy as np
+
 
 def getConfessions(confessionsSource):
 	print(confessionsSource)

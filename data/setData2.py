@@ -1,6 +1,8 @@
 import os
 import json
 import re
+import datetime
+
 
 keyFile = open("key_words.json", mode='r', encoding='utf-8')
 keyWords = json.load(keyFile)
@@ -9,7 +11,7 @@ issueFile = open("issues.json", mode='r', encoding='utf-8')
 issuesWords = json.load(issueFile)
 
 def processSource(source, name, isUniversity):
-	posts = open(source+".json", mode='r', encoding='utf-8')
+	posts = open("data1/"+source+".json", mode='r', encoding='utf-8')
 	data1 = json.load(posts)
 
 	posts = []
@@ -21,7 +23,8 @@ def processSource(source, name, isUniversity):
 		
 		words = []
 		issues = []
-		
+		time2 = datetime.datetime.fromtimestamp(int(post1["unix-time"])).isoformat()
+				
 		for k in keyWords:
 			# print(k)
 			if k in post1["content"]: 
@@ -39,8 +42,8 @@ def processSource(source, name, isUniversity):
 			post["source"] 		= post1["source"]
 			post["college"] 	= name
 			post["isUniversity"] = isUniversity
-			post["time"] 		= post1["time"]
-			post["unix-time"] 	= post1["unix-time"]
+			post["time"] 		= time2
+			post["unix_time"] 	= int(post1["unix-time"])
 			post["content"] 	= post1["content"]
 			post["len_char"] 	= len(post1["content"])
 			post["len_words"] 	= len(post1["content"].split())
@@ -56,7 +59,7 @@ def processSource(source, name, isUniversity):
 		except AttributeError:
 			pass
 		
-	filename = source+"_2.json"
+	filename = "data2/"+source+"_2.json"
 	with open(filename, mode='w', encoding='utf-8') as f:
 		json.dump(posts, f, indent=2, ensure_ascii=False)
 		

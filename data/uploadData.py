@@ -11,7 +11,9 @@ def upload_data(name):
 	collection = db.posts
 	collection.insert_many(data)
 # confessionsList = ["ShenkarConfessions"]
-confessionsList = ["ShenkarConfessions","bezalelconf","IDCHerzliyaConfessions",
+confessionsList = ["ColmanConfessions","Open.University.of.Israel.Confessions",
+					"MTACONFESS","LevinskyConfessions","JCTConfessions","smkbconfessions",
+					"ShenkarConfessions","bezalelconf","IDCHerzliyaConfessions",
 					"sapirconfession","telhaiconfessions","hitconfessionsisrael",
 					"RuppinConfession","HUIConfessions","TechnionConfessions",
 					"ArielUConfessions","tel.aviv.university.confessions","BGUConfession",

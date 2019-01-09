@@ -30,6 +30,11 @@ app.all('*', (req, res, next) => {
 
 app.get('/', posts.getRandomPosts);
 app.get('/getSumPostsByMonth', posts.getSumPostsByMonth);
+app.get('/getSumPostsByDay', posts.getSumPostsByDay);
+app.get('/getSumPostsByCollege', posts.getSumPostsByCollege);
+app.get('/getIssues', posts.getIssues);
+app.get('/getMeanWords', posts.getMeanWords);
+
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);

@@ -5,7 +5,7 @@ import os
 import json
 import re
 import time
-import datetime
+# import datetime
 
 
 def getConfessions(confessionsSource):
@@ -43,8 +43,8 @@ def getConfessions(confessionsSource):
 			browser.execute_script("arguments[0].setAttribute('class','text_exposed_root text_exposed')", text_root[0])
 
 		utime = time1.get_attribute("data-utime")
-		time2 = datetime.datetime.fromtimestamp(int(utime)).strftime('%Y-%m-%d %H:%M:%S')
-		print(time2)
+		# time2 = datetime.datetime.fromtimestamp(int(utime)).strftime('%Y-%m-%d %H:%M:%S')
+		print(utime)
 
 		contents = i.find_elements_by_tag_name('p')
 		content = '';
@@ -106,7 +106,7 @@ def getConfessions(confessionsSource):
 		try:
 			post = {}
 			post["source"] = confessionsSource
-			post["time"] = time2
+			# post["time"] = time2
 			post["unix-time"] = utime
 			post["content"] = content
 			post["likes"] = likes
@@ -121,7 +121,7 @@ def getConfessions(confessionsSource):
 		except AttributeError:
 			pass
 
-	filename = confessionsSource+".json"
+	filename = "data1/"+confessionsSource+".json"
 	with open(filename, mode='w', encoding='utf-8') as f:
 	    json.dump(posts, f, ensure_ascii=False)
 
@@ -145,8 +145,9 @@ def processWord(word):
 	return word
 	
 browser 		= webdriver.Firefox()
-# confessionsList = ["biuconfessions2018"]
-confessionsList = ["ShenkarConfessions","bezalelconf","IDCHerzliyaConfessions",
+confessionsList = ["ColmanConfessions","Open.University.of.Israel.Confessions",
+					"MTACONFESS","LevinskyConfessions","JCTConfessions","smkbconfessions",
+					"ShenkarConfessions","bezalelconf","IDCHerzliyaConfessions",
 					"sapirconfession","telhaiconfessions","hitconfessionsisrael",
 					"RuppinConfession","HUIConfessions","TechnionConfessions",
 					"ArielUConfessions","tel.aviv.university.confessions","BGUConfession",

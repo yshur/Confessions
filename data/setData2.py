@@ -66,6 +66,11 @@ def processSource(source, name, isUniversity):
 	
 
 collegeArray = {
+				"ColmanConfessions": "Hamichlala Leminhal",
+				"MTACONFESS": "Akademit Tel Aviv",
+				"LevinskyConfessions": "Levinsky",
+				"JCTConfessions": "Lev",
+				"smkbconfessions": "Saminar Hakibuzim",
 				"ShenkarConfessions":"Shenkar",
 				"bezalelconf": "Bezalel",
 				"IDCHerzliyaConfessions": "IDC BenThumi Herzliya",
@@ -75,6 +80,7 @@ collegeArray = {
 				"RuppinConfession": "Rupin"
 					}
 universityArray = {
+				"Open.University.of.Israel.Confessions": "Open University",
 				"HUIConfessions": "Haifa University",
 				"TechnionConfessions": "Technion",
 				"ArielUConfessions": "Ariel",
@@ -85,8 +91,10 @@ universityArray = {
 				}
 					
 for s in collegeArray:
+	print(s)
 	processSource(s, collegeArray[s], False)
 	
 for s in universityArray:
+	print(s)
 	processSource(s, universityArray[s], True)
 	

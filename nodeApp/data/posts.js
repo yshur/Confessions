@@ -44,7 +44,7 @@ exports.getSumPostsByMonth = (req, res) => {
 };
 
 exports.getSumPostsByDay = (req, res) => {
-    console.log('getSumPostsByDay');
+    console.log('getSumPostsByMonth');
 	var q = Post.aggregate(
 	   [
 		  {
@@ -111,29 +111,6 @@ exports.getIssues = (req, res) => {
 	});
 };
 
-    console.log(getSumPostsByIssue);
-	var q = Post.aggregate(
-	   [
-		  {
-			$group : {
-			   _id : { isUniversity: "$issues" } ,
-			   count: { $sum: -1 }
-			}
-		  }
-	   ]
-	).sort({
-		"count": -1
-	});
-	
-	q.exec(function(err, posts)  {
-		if (err) {
-			console.log(`err: ${err}`);
-			res.status(200).json(`{ err : ${err} }`);
-		}
-		console.log(posts);
-		res.status(200).json(posts);
-	});
-};
 exports.getMeanWords = (req, res) => {
     console.log('getMeanWords');
 	var q = Post.distinct( "mean_words" );

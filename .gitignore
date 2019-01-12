@@ -1,3 +1,4 @@
 data/geckodriver.log
 nodeApp/node_modules
 reactApp/node_modules
+reactApp/build

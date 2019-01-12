@@ -72,6 +72,31 @@ exports.getSumPostsByDay = (req, res) => {
 	});
 };
 
+exports.getSumPostsByWeekDay = (req, res) => {
+    console.log('getSumPostsByMonth');
+	var q = Post.aggregate(
+	   [
+		  {
+			$group : {
+			   _id : { day: { $dayOfWeek: { $dateFromString: { dateString: "$time" } } } },
+			   count: { $sum: 1 }
+			}
+		  }
+	   ]
+	).sort({
+		"_id.day": 1
+	});
+	
+	q.exec(function(err, posts)  {
+		if (err) {
+			console.log(`err: ${err}`);
+			res.status(200).json(`{ err : ${err} }`);
+		}
+		console.log(posts);
+		res.status(200).json(posts);
+	});
+};
+
 exports.getSumPostsByCollege = (req, res) => {
     console.log('getSumPostsByCollege');
 	var q = Post.aggregate(

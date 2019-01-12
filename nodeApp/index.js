@@ -31,6 +31,7 @@ app.all('*', (req, res, next) => {
 app.get('/', posts.getRandomPosts);
 app.get('/getSumPostsByMonth', posts.getSumPostsByMonth);
 app.get('/getSumPostsByDay', posts.getSumPostsByDay);
+app.get('/getSumPostsByWeekDay', posts.getSumPostsByWeekDay);
 app.get('/getSumPostsByCollege', posts.getSumPostsByCollege);
 app.get('/getIssues', posts.getIssues);
 app.get('/getMeanWords', posts.getMeanWords);

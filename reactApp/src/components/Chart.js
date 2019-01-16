@@ -22,27 +22,6 @@ class Chart extends Component{
   render(){
     return (
       <div className = 'chart'>
-        <Line
-            data={this.state.chartData}
-            width={100}
-            height={50}
-            options={{
-              title:{
-                display: this.props.displayTitle,
-                text: 'Sum Confessions Per Momth',
-                fontSize:24
-              },
-              legend:{
-                display: this.props.displayLegend,
-                position: this.props.legendPosition,
-                labels:{
-                  fontColor:'#000'
-                }
-              },
-            }}
-
-          />
-
         <Bar
             data={this.state.chartData}
             width={100}
@@ -50,7 +29,7 @@ class Chart extends Component{
             options={{
               title:{
                 display: this.props.displayTitle,
-                text: 'Sum Confessions Per Moמth',
+                text: this.props.title,
                 fontSize:24
               },
               legend:{
@@ -64,26 +43,6 @@ class Chart extends Component{
 
           />
 
-        <Pie
-            data={this.state.chartData}
-            width={100}
-            height={50}
-            options={{
-              title:{
-                display: this.props.displayTitle,
-                text: 'Sum Confessions Per Momth',
-                fontSize:24
-              },
-              legend:{
-                display: this.props.displayLegend,
-                position: this.props.legendPosition,
-                labels:{
-                  fontColor:'#000'
-                }
-              },
-            }}
-
-          />
       </div>
     )
   }

@@ -7,8 +7,10 @@ import datetime
 keyFile = open("key_words.json", mode='r', encoding='utf-8')
 keyWords = json.load(keyFile)
 
+	
 issueFile = open("issues.json", mode='r', encoding='utf-8')
 issuesWords = json.load(issueFile)
+
 
 def processSource(source, name, isUniversity):
 	posts = open("data1/"+source+".json", mode='r', encoding='utf-8')
@@ -16,26 +18,24 @@ def processSource(source, name, isUniversity):
 
 	posts = []
 
-	# file3 = open('data3.txt', 'a', encoding='utf-8') 
-
 	for post1 in data1:
-		# print(post1['likes'])
-		
-		words = []
-		issues = []
-		time2 = datetime.datetime.fromtimestamp(int(post1["unix-time"])).isoformat()
-				
-		for k in keyWords:
-			# print(k)
+	
+		words = {}
+		for k,v in keyWords.items():
 			if k in post1["content"]: 
-				# print(keyWords[k])
-				# file3.write("keyWord "+k+" = "+keyWords[k]) 
-				words.append(keyWords[k])
-				
-		for k in words:
-			# print(issuesWords[k])
-			# file3.write("issue of "+k+" = "+issuesWords[k])
-			issues.append(issuesWords[k])
+				if v in words:
+					words[v] = words[v]+1
+				else:
+					words[v] = 1
+					
+		issues = {}
+		for k,v in words.items():
+			if issuesWords[k] in issues:
+				issues[issuesWords[k]] = issues[issuesWords[k]]+v
+			else:
+				issues[issuesWords[k]] = 1
+		
+		time2 = datetime.datetime.fromtimestamp(int(post1["unix-time"])).isoformat()
 			
 		try:
 			post = {}
@@ -43,17 +43,14 @@ def processSource(source, name, isUniversity):
 			post["college"] 	= name
 			post["isUniversity"] = isUniversity
 			post["time"] 		= time2
-			post["unix_time"] 	= int(post1["unix-time"])
 			post["content"] 	= post1["content"]
 			post["len_char"] 	= len(post1["content"])
 			post["len_words"] 	= len(post1["content"].split())
 			post["likes"] 		= post1["likes"]
 			post["shares"] 		= post1["shares"]
 			post["comments"] 	= post1["comments"]
-			post["sum_like"] 	= post1["sum_like"]
-			post["words"] 		= post1["words"]
-			post["mean_words"] 	= list(set(words))
-			post["issues"] 		= list(set(issues))
+			post["mean_words"] 	= words
+			post["issues"] 		= issues
 			posts.append(post)
 
 		except AttributeError:

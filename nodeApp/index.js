@@ -28,13 +28,13 @@ app.all('*', (req, res, next) => {
     // res.status(200).sendFile(`${__dirname}/index.html`);
 // });
 
-app.get('/', posts.getRandomPosts);
+app.get('/', posts.getIssues);
 app.get('/getSumPostsByMonth', posts.getSumPostsByMonth);
-app.get('/getSumPostsByDay', posts.getSumPostsByDay);
-app.get('/getSumPostsByWeekDay', posts.getSumPostsByWeekDay);
+// app.get('/getSumPostsByDay', posts.getSumPostsByDay);
+// app.get('/getSumPostsByWeekDay', posts.getSumPostsByWeekDay);
 app.get('/getSumPostsByCollege', posts.getSumPostsByCollege);
-app.get('/getIssues', posts.getIssues);
-app.get('/getMeanWords', posts.getMeanWords);
+app.get('/getRandomPosts', posts.getRandomPosts);
+// app.get('/getMeanWords', posts.getMeanWords);
 
 
 app.listen(port, () => {

@@ -29,12 +29,16 @@ app.all('*', (req, res, next) => {
 // });
 
 app.get('/', posts.getIssues);
-app.get('/getSumPostsByMonth', posts.getSumPostsByMonth);
-// app.get('/getSumPostsByDay', posts.getSumPostsByDay);
-// app.get('/getSumPostsByWeekDay', posts.getSumPostsByWeekDay);
-app.get('/getSumPostsByCollege', posts.getSumPostsByCollege);
+app.get('/getColleges', posts.getColleges);
+app.get('/getSumIssues', posts.getSumIssues);
+app.get('/getSumIssuesMonth', posts.getSumIssuesMonth);
+app.get('/getSumMonth', posts.getSumMonth);
+app.get('/getSumColleges', posts.getSumColleges);
+app.get('/getSumCollegeMonth', posts.getSumCollegeMonth);
 app.get('/getRandomPosts', posts.getRandomPosts);
 // app.get('/getMeanWords', posts.getMeanWords);
+// app.get('/getSumPostsByDay', posts.getSumPostsByDay);
+// app.get('/getSumPostsByWeekDay', posts.getSumPostsByWeekDay);
 
 
 app.listen(port, () => {

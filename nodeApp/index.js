@@ -35,10 +35,10 @@ app.get('/getSumIssuesMonth', posts.getSumIssuesMonth);
 app.get('/getSumMonth', posts.getSumMonth);
 app.get('/getSumColleges', posts.getSumColleges);
 app.get('/getSumCollegeMonth', posts.getSumCollegeMonth);
+app.get('/getSumIssuesCollege', posts.getSumIssuesCollege);
 app.get('/getRandomPosts', posts.getRandomPosts);
-// app.get('/getMeanWords', posts.getMeanWords);
-// app.get('/getSumPostsByDay', posts.getSumPostsByDay);
-// app.get('/getSumPostsByWeekDay', posts.getSumPostsByWeekDay);
+app.get('/getMeanWords', posts.getMeanWords);
+
 
 
 app.listen(port, () => {

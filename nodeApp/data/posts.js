@@ -66,41 +66,41 @@ exports.getSumMonth = (req, res) => {
 };
 exports.getSumColleges = (req, res) => {
     console.log('getSumColleges');
-	var q = Post.aggregate(
-	   [
-			{$group: { _id: "$college", count: { $sum: 1 } }},
-			{$project: { _id: 0, college: "$_id", count: 1 } },
-			{$sort: { count: -1 } }
-	   ]);
+    var q = Post.aggregate(
+       [
+    		{$group: { _id: "$college", count: { $sum: 1 } }},
+    		{$project: { _id: 0, college: "$_id", count: 1 } },
+    		{$sort: { count: -1 } }
+       ]);
 
-	q.exec(function(err, colleges)  {
-		if (err) {
-			console.log(`err: ${err}`);
-			res.status(200).json(`{ err : ${err} }`);
-		}
-		console.log(colleges);
-		res.status(200).json(colleges);
-	});
+    q.exec(function(err, colleges)  {
+    	if (err) {
+    		console.log(`err: ${err}`);
+    		res.status(200).json(`{ err : ${err} }`);
+    	}
+    	console.log(colleges);
+    	res.status(200).json(colleges);
+    });
 };
 exports.getSumIssues = (req, res) => {
     console.log('getSumIssues');
-	var q = Post.aggregate(
-	   [
-			{$project: { _id: 0, issues: 1 } },
-			{$unwind: "$issues" },
-			{$group: { _id: "$issues", count: { $sum: 1 } }},
-			{$project: { _id: 0, issue: "$_id", count: 1 } },
-			{$sort: { count: -1 } }
-	   ]);
+    var q = Post.aggregate(
+       [
+    		{$project: { _id: 0, issues: 1 } },
+    		{$unwind: "$issues" },
+    		{$group: { _id: "$issues", count: { $sum: 1 } }},
+    		{$project: { _id: 0, issue: "$_id", count: 1 } },
+    		{$sort: { count: -1 } }
+       ]);
 
-	q.exec(function(err, posts)  {
-		if (err) {
-			console.log(`err: ${err}`);
-			res.status(200).json(`{ err : ${err} }`);
-		}
-		console.log(posts);
-		res.status(200).json(posts);
-	});
+    q.exec(function(err, posts)  {
+    	if (err) {
+    		console.log(`err: ${err}`);
+    		res.status(200).json(`{ err : ${err} }`);
+    	}
+    	console.log(posts);
+    	res.status(200).json(posts);
+    });
 };
 
 exports.getSumCollegeMonth = (req, res) => {

@@ -34,6 +34,7 @@ class CollegeItem extends Component {
                 borderWidth:2,
                 borderColor:'#777',
                 hoverBorderWidth:3,
+                fill:false,
                 hoverBorderColor:'#000'
                 }]
           }

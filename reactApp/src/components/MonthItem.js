@@ -14,14 +14,14 @@ class MonthItem extends Component {
     this.add = this.add.bind(this)
   }
   componentDidMount() {
-  var url = 'https://collegeconfessions.herokuapp.com/getSumPostsByMonth';
+  var url = 'https://collegeconffessions.herokuapp.com/getSumMonth';
   console.log(url)
     axios.get(url)
       .then((res) => {
         console.log(res)
         var self=this;
         res.data.map((Chart) => {
-                self.add(Chart._id.year, Chart._id.month, Chart.count)
+                self.add(Chart.year, Chart.month, Chart.count)
                 console.log(Chart)
               });
         this.setState(prevState => ({

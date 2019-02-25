@@ -14,14 +14,14 @@ class CollegeItem extends Component {
     this.add = this.add.bind(this)
   }
   componentDidMount() {
-  var url = 'https://collegeconfessions.herokuapp.com/getSumPostsByCollege';
+  var url = 'https://collegeconffessions.herokuapp.com/getSumColleges';
   console.log(url)
     axios.get(url)
       .then((res) => {
         console.log(res)
         var self=this;
         res.data.map((Chart) => {
-                self.add(Chart._id.college, Chart.count)
+                self.add(Chart.college, Chart.count)
                 console.log(Chart)
               });
         this.setState(prevState => ({

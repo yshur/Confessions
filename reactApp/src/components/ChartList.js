@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import MonthItem from './MonthItem';
 import CollegeItem from './CollegeItem';
-import DayWeekItem from './DayWeekItem';
-import DayItem from './DayItem';
+import CollegeMonthItem from './CollegeMonthItem';
 
 class ChartList extends Component {
   constructor(){
@@ -17,8 +16,7 @@ class ChartList extends Component {
         <div>
           <MonthItem />
           <CollegeItem />
-          <DayWeekItem />
-          <DayItem />
+          <CollegeMonthItem />
         </div>
 
 		);

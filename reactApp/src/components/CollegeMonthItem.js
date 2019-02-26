@@ -16,7 +16,7 @@ class CollegeMonthItem extends Component {
 
   }
   componentDidMount() {
-  var url = 'http://localhost:3000/getSumCollegeMonth';
+  var url = 'https://collegeconffessions.herokuapp.com/getSumCollegeMonth';
   console.log(url)
     axios.get(url)
       .then((res) => {

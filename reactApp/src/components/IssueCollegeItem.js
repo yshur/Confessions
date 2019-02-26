@@ -16,7 +16,7 @@ class IssueCollegeItem extends Component {
 
   }
   componentDidMount() {
-  var url = 'http://localhost:3000/getSumIssuesCollege';
+  var url = 'https://collegeconffessions.herokuapp.com/getSumIssuesCollege';
   console.log(url)
     axios.get(url)
       .then((res) => {

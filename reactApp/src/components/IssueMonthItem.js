@@ -2,29 +2,28 @@ import React, { Component } from 'react';
 import Chart from './Chart';
 import axios from 'axios'
 
-class CollegeMonthItem extends Component {
+class IssueMonthItem extends Component {
   constructor(){
     super();
     this.state = {
       datasets: [],
       labels: [],
       chartData: {},
-	     title: 'Sum Confessions of college Per Month'
+	     title: 'Sum Confessions of issue Per Month'
     }
     this.add = this.add.bind(this)
     this.getRandomColor = this.getRandomColor.bind(this)
 
   }
   componentDidMount() {
-  var url = 'http://localhost:3000/getSumCollegeMonth';
+  var url = 'http://localhost:3000/getSumIssuesMonth';
   console.log(url)
     axios.get(url)
       .then((res) => {
         console.log(res)
         var self=this;
-        res.data.map((college) => {
-                self.add(college[0], college[1])
-              //  console.log(Chart)
+        res.data.map((issue) => {
+                self.add(issue[0], issue[1])
               });
         this.setState(prevState => ({
           chartData:{
@@ -43,12 +42,12 @@ class CollegeMonthItem extends Component {
     }
     return color;
   }
-  add(collegeName, collegeData) {
-    console.log(collegeName)
+  add(issueName, issueData) {
+    console.log(issueName)
       var countArray = []
       var color = this.getRandomColor()
       var self=this;
-      collegeData.forEach(function (a) {
+      issueData.forEach(function (a) {
         if(a.year < 2018) {
           return;
         }
@@ -70,7 +69,7 @@ class CollegeMonthItem extends Component {
           datasets: [
             ...prevState.datasets,
             {
-                label:collegeName,
+                label:issueName,
                 data: countArray,
                 backgroundColor:[
                   color
@@ -98,4 +97,4 @@ class CollegeMonthItem extends Component {
 		);
   }
 }
-export default CollegeMonthItem;
+export default IssueMonthItem;

@@ -113,7 +113,7 @@ exports.getSumCollegeMonth = (req, res) => {
           college: "$college" }, count: {$sum: 1 }
    			} },
         {$project: {_id: 0, college: "$_id.college", month: "$_id.month", year: "$_id.year", count: 1 } },
-  			{$sort: {"college": 1, "year": -1, "month": -1} }
+  			{$sort: {"college": 1, "year": 1, "month": 1} }
        ]);
 
 	q.exec(function(err, posts)  {
@@ -121,8 +121,16 @@ exports.getSumCollegeMonth = (req, res) => {
 			console.log(`err: ${err}`);
 			res.status(200).json(`{ err : ${err} }`);
 		}
-		console.log(posts);
-		res.status(200).json(posts);
+    var grouped = Object.create(null);
+    posts.forEach(function (a) {
+      grouped[a.college] = grouped[a.college] || [];
+      grouped[a.college].push(a);
+    });
+    var result = Object.keys(grouped).map(function(key) {
+      return [key, grouped[key]];
+    });
+		console.log(result);
+		res.status(200).json(result);
 	});
 };
 exports.getSumIssuesMonth = (req, res) => {
@@ -136,7 +144,7 @@ exports.getSumIssuesMonth = (req, res) => {
          year: {$year: {$dateFromString: {dateString: "$time" } } },
           }, count: { $sum: 1 } }},
          {$project: {_id: 0, issue: "$_id.issue", month: "$_id.month", year: "$_id.year", count: 1 } },
-        {$sort: {"issue": 1, "year": -1, "month": -1} }
+        {$sort: {"issue": 1, "year": 1, "month": 1} }
        ]);
 
 	q.exec(function(err, posts)  {
@@ -144,8 +152,16 @@ exports.getSumIssuesMonth = (req, res) => {
 			console.log(`err: ${err}`);
 			res.status(200).json(`{ err : ${err} }`);
 		}
-		console.log(posts);
-		res.status(200).json(posts);
+    var grouped = Object.create(null);
+    posts.forEach(function (a) {
+      grouped[a.issue] = grouped[a.issue] || [];
+      grouped[a.issue].push(a);
+    });
+    var result = Object.keys(grouped).map(function(key) {
+      return [key, grouped[key]];
+    });
+		console.log(result);
+		res.status(200).json(result);
 	});
 };
 exports.getSumIssuesCollege = (req, res) => {
@@ -164,8 +180,16 @@ exports.getSumIssuesCollege = (req, res) => {
 			console.log(`err: ${err}`);
 			res.status(200).json(`{ err : ${err} }`);
 		}
-		console.log(posts);
-		res.status(200).json(posts);
+    var grouped = Object.create(null);
+    posts.forEach(function (a) {
+      grouped[a.issue] = grouped[a.issue] || [];
+      grouped[a.issue].push(a);
+    });
+    var result = Object.keys(grouped).map(function(key) {
+      return [key, grouped[key]];
+    });
+		console.log(result);
+		res.status(200).json(result);
 	});
 };
 

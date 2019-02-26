@@ -2,33 +2,32 @@ import React, { Component } from 'react';
 import Chart from './Chart';
 import axios from 'axios'
 
-class CollegeMonthItem extends Component {
+class IssueCollegeItem extends Component {
   constructor(){
     super();
     this.state = {
       datasets: [],
       labels: [],
       chartData: {},
-	     title: 'Sum Confessions of college Per Month'
+	     title: 'Sum Confessions of issue Per College'
     }
     this.add = this.add.bind(this)
     this.getRandomColor = this.getRandomColor.bind(this)
 
   }
   componentDidMount() {
-  var url = 'http://localhost:3000/getSumCollegeMonth';
+  var url = 'http://localhost:3000/getSumIssuesCollege';
   console.log(url)
     axios.get(url)
       .then((res) => {
         console.log(res)
         var self=this;
-        res.data.map((college) => {
-                self.add(college[0], college[1])
-              //  console.log(Chart)
+        res.data.map((issue) => {
+                self.add(issue[0], issue[1])
               });
         this.setState(prevState => ({
           chartData:{
-            labels: this.state.labels.sort(),
+            labels: this.state.labels,
             datasets: this.state.datasets
           }
         }))
@@ -43,26 +42,19 @@ class CollegeMonthItem extends Component {
     }
     return color;
   }
-  add(collegeName, collegeData) {
-    console.log(collegeName)
+  add(issueName, issueData) {
+    console.log(issueName)
       var countArray = []
       var color = this.getRandomColor()
       var self=this;
-      collegeData.forEach(function (a) {
-        if(a.year < 2018) {
-          return;
-        }
+      issueData.forEach(function (a) {
           countArray.push(a.count);
-          if(a.month < 10) {
-            a.month = "0"+a.month
-          }
-          if (self.state.labels.indexOf(a.year+"-"+a.month) < 0) {
+          if (self.state.labels.indexOf(a.college) < 0) {
             self.setState(prevState => ({
                 labels: [
                   ...prevState.labels,
-                    a.year+"-"+a.month
+                    a.college
                   ]
-                  //labels: labels.sort()
             }));
           }
       });
@@ -70,7 +62,7 @@ class CollegeMonthItem extends Component {
           datasets: [
             ...prevState.datasets,
             {
-                label:collegeName,
+                label:issueName,
                 data: countArray,
                 backgroundColor:[
                   color
@@ -79,6 +71,8 @@ class CollegeMonthItem extends Component {
                 borderColor: color,
                 hoverBorderWidth:3,
                 fill:false,
+                autoSkip: false,
+                stepSize: 1,
                 hoverBorderColor:'#000'
               }
             ]
@@ -98,4 +92,4 @@ class CollegeMonthItem extends Component {
 		);
   }
 }
-export default CollegeMonthItem;
+export default IssueCollegeItem;

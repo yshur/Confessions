@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import MonthItem from './MonthItem';
-import CollegeItem from './CollegeItem';
+import IssueMonthItem from './IssueMonthItem';
 import CollegeMonthItem from './CollegeMonthItem';
+import IssueCollegeItem from './IssueCollegeItem';
 
 class ChartList extends Component {
   constructor(){
@@ -14,9 +14,10 @@ class ChartList extends Component {
     console.log(this.state.chartData);
 		return (
         <div>
-          <MonthItem />
-          <CollegeItem />
+          <IssueMonthItem />
           <CollegeMonthItem />
+          <IssueCollegeItem />
+
         </div>
 
 		);

@@ -7,7 +7,12 @@ class CollegeMonthItem extends Component {
     super();
     this.state = {
       datasets: [],
-      labels: [],
+      labels: [
+        '01/2018','02/2018','03/2018',
+        '04/2018','05/2018','06/2018','07/2018',
+        '08/2018','09/2018','10/2018','11/2018',
+        '12/2018','01/2019'
+              ],
       chartData: {},
 	     title: 'Sum Confessions of college Per Month'
     }
@@ -28,7 +33,7 @@ class CollegeMonthItem extends Component {
               });
         this.setState(prevState => ({
           chartData:{
-            labels: this.state.labels.sort(),
+            labels: this.state.labels,
             datasets: this.state.datasets
           }
         }))
@@ -45,25 +50,18 @@ class CollegeMonthItem extends Component {
   }
   add(collegeName, collegeData) {
     console.log(collegeName)
-      var countArray = []
+      var countArray = [0,0,0,0,0,0,0,
+                        0,0,0,0,0,0]
       var color = this.getRandomColor()
       var self=this;
       collegeData.forEach(function (a) {
-        if(a.year < 2018) {
-          return;
-        }
-          countArray.push(a.count);
-          if(a.month < 10) {
-            a.month = "0"+a.month
+          if(a.year < 2018) {
+            return;
           }
-          if (self.state.labels.indexOf(a.year+"-"+a.month) < 0) {
-            self.setState(prevState => ({
-                labels: [
-                  ...prevState.labels,
-                    a.year+"-"+a.month
-                  ]
-                  //labels: labels.sort()
-            }));
+          if(a.year == 2018) {
+            countArray[a.month-1] = a.count
+          } else {
+            countArray[12] = a.count
           }
       });
       this.setState(prevState => ({

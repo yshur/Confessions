@@ -15,14 +15,14 @@ class MonthItem extends Component {
   }
   componentDidMount() {
   var url = 'https://collegeconffessions.herokuapp.com/getSumMonth';
-  console.log(url)
+//  console.log(url)
     axios.get(url)
       .then((res) => {
-        console.log(res)
+      //  console.log(res)
         var self=this;
         res.data.map((Chart) => {
                 self.add(Chart.year, Chart.month, Chart.count)
-                console.log(Chart)
+              //  console.log(Chart)
               });
         this.setState(prevState => ({
           chartData:{
@@ -43,7 +43,7 @@ class MonthItem extends Component {
 })
 }
   add(year, month, count) {
-    console.log(year+"-"+month+": "+count)
+  //  console.log(year+"-"+month+": "+count)
 		this.setState(prevState => ({
         labels: [
           ...prevState.labels,
@@ -59,7 +59,7 @@ class MonthItem extends Component {
 
 
 	render() {
-    console.log(this.state.chartData);
+  //  console.log(this.state.chartData);
 		return (
         <div>
           <Chart chartData={this.state.chartData} title={this.state.title} legendPosition='bottom'/>

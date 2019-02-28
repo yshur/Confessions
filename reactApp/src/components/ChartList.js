@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import IssueMonthItem from './IssueMonthItem';
 import CollegeMonthItem from './CollegeMonthItem';
 import IssueCollegeItem from './IssueCollegeItem';
-//import IssueItem from './IssueItem';
+import IssueItem from './IssueItem';
 import './chart.css';
 //import header from '../header';
 
@@ -15,7 +15,6 @@ class ChartList extends Component {
 
 	render() {
 		return (
-      //<Header/>
         <div >
           <h1> ? אתם סטודנטים </h1>
           <h2> ? התוודיתם </h2>
@@ -28,7 +27,7 @@ class ChartList extends Component {
             <h1> ? מצאתם את הנושא שכתבתם עליו </h1>
             <h2> ...זה תלוי איפה אתם לומדים </h2>
           <IssueCollegeItem />
-          
+          <IssueItem />
 
         </div>
 

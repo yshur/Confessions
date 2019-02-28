@@ -49,11 +49,7 @@ class IssueMonthItem extends Component {
     return color;
   }
   add(issueName, issueData) {
-<<<<<<< HEAD
     // console.log(issueName)
-=======
-    console.log(issueName)
->>>>>>> 9cee9c8c9d82dd10cd80ee5441a1c3e569fe9c58
       var countArray = [0,0,0,0,0,0,0,
                         0,0,0,0,0,0]
       var color = this.getRandomColor()
@@ -61,11 +57,7 @@ class IssueMonthItem extends Component {
           if(a.year < 2018) {
             return;
           }
-<<<<<<< HEAD
           if(a.year === 2018) {
-=======
-          if(a.year == 2018) {
->>>>>>> 9cee9c8c9d82dd10cd80ee5441a1c3e569fe9c58
             countArray[a.month-1] = a.count
           } else {
             countArray[12] = a.count

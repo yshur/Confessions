@@ -3,6 +3,7 @@ import IssueMonthItem from './IssueMonthItem';
 import CollegeMonthItem from './CollegeMonthItem';
 import IssueCollegeItem from './IssueCollegeItem';
 import IssueItem from './IssueItem';
+import PostItem from './PostItem';
 import './chart.css';
 //import header from '../header';
 
@@ -28,7 +29,7 @@ class ChartList extends Component {
             <h2> ...זה תלוי איפה אתם לומדים </h2>
           <IssueCollegeItem />
           <IssueItem />
-
+          <PostItem />
         </div>
 
 		);

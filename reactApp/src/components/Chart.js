@@ -46,7 +46,7 @@ class Chart extends Component{
               },
               layout: {
                 padding: {
-                    left: 200,
+                    left: 150,
                     right: 50,
                     top: 0,
                     bottom: 90

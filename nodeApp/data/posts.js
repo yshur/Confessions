@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 var Post = require('./schema/postSchema');
+var Issue = require('./schema/issueSchema');
 var random = require('mongoose-random');
 
 exports.getIssues = (req, res) => {
     console.log('getIssues');
-	var q = Post.distinct( "issues" );
+	var q = Issue.find();
 
 	q.exec(function(err, issues)  {
 		if (err) {

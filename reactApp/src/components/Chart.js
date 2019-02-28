@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Bar, Line, Pie} from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2';
+// import {Bar, Pie} from 'react-chartjs-2';
 
 class Chart extends Component{
   constructor(props){
@@ -7,7 +8,7 @@ class Chart extends Component{
     this.state = {
       chartData: props.chartData,
     }
-    console.log(props);
+    // console.log(props);
   }
 
   static defaultProps = {
@@ -30,7 +31,11 @@ class Chart extends Component{
               title:{
                 display: this.props.displayTitle,
                 text: this.props.title,
-                fontSize:24
+                fontSize:24,
+                fontFamily: 'Arial',
+                fontStyle: 'bold',
+                position: 'top',
+                lineHeight: 1
               },
               legend:{
                 display: this.props.displayLegend,
@@ -39,6 +44,14 @@ class Chart extends Component{
                   fontColor:'#000'
                 }
               },
+              layout: {
+                padding: {
+                    left: 200,
+                    right: 50,
+                    top: 0,
+                    bottom: 90
+            }
+        }
             }}
 
           />

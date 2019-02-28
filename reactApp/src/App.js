@@ -13,6 +13,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
           <ChartList legendPosition='bottom'/>
           <div className="footer">
   					<p style={{marginTop: "20px"}}> &copy; All right reserved to Roi Shmueli & Yair Shur</p>

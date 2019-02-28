@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Chart from './Chart';
+import './chart.css';
 import axios from 'axios'
 
 class IssueCollegeItem extends Component {
@@ -9,7 +10,7 @@ class IssueCollegeItem extends Component {
       datasets: [],
       labels: [],
       chartData: {},
-	     title: 'Sum Confessions of issue Per College'
+	     title: ''
     }
     this.add = this.add.bind(this)
     this.getRandomColor = this.getRandomColor.bind(this)
@@ -17,10 +18,10 @@ class IssueCollegeItem extends Component {
   }
   componentDidMount() {
   var url = 'https://collegeconffessions.herokuapp.com/getSumIssuesCollege';
-  console.log(url)
+  // console.log(url)
     axios.get(url)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         var self=this;
         res.data.map((issue) => {
                 self.add(issue[0], issue[1])
@@ -43,10 +44,11 @@ class IssueCollegeItem extends Component {
     return color;
   }
   add(issueName, issueData) {
-    console.log(issueName)
+    // console.log(issueName)
       var countArray = []
       var color = this.getRandomColor()
       var self=this;
+      // make array of counts by college
       issueData.forEach(function (a) {
           countArray.push(a.count);
           if (self.state.labels.indexOf(a.college) < 0) {
@@ -73,8 +75,10 @@ class IssueCollegeItem extends Component {
                 fill:false,
                 autoSkip: false,
                 stepSize: 1,
-                hoverBorderColor:'#000'
-              }
+                hoverBorderColor:'#000',
+
+              },
+
             ]
           }));
       }
@@ -83,10 +87,10 @@ class IssueCollegeItem extends Component {
 
 
 	render() {
-    console.log(this.state.datasets);
+    // console.log(this.state.datasets);
 		return (
         <div>
-          <Chart chartData={this.state.chartData} title={this.state.title} legendPosition='bottom'/>
+          <Chart chartData={this.state.chartData} title={this.state.title} legendPosition='right'/>
         </div>
 
 		);
